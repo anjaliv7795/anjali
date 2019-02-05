@@ -1,0 +1,236 @@
+<ol class="breadcrumb border-bottom">
+    <li class="module_name flex-grow-1">LAUDEA: Alumni Engagement Portal</li>
+
+    <li class="breadcrumb-item"><a data-ui-sref="home">Home</a></li>
+    <li class="breadcrumb-item active" data-ui-sref="jobs">Jobs</li>
+</ol>
+
+
+<section class="content">
+    <div class="element-wrapper">
+        <h1 class="element-title">Jobs</h1>
+        <div class="element-actions">
+            <button class="btn btn-sm btn-primary" data-toggle="collapse" data-target="#drawerFilter"><i class="fas fa-plus"></i>Filters</button>
+        </div>
+    </div>
+</section>
+<div class="card p-5">
+    <div class="element-actions" style="padding: 15px;">
+        <a class="btn btn-sm btn-success float-right" data-ui-sref-active="active" data-target="#jobModal" data-toggle="modal">
+            Post Job </a>
+        <div class="col-md-3 mt-2 mt-md-0 text-right">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchh" id="search" aria-label="Search"
+                    aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-gray-grad" type="button">
+                        <i class="fas fa-search mr-0"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-3" ng-repeat="job in jobarr | filter:searchh">
+            <!-- <p> {{job.description | limitTo:numLimit}} </p> -->
+            <div class="row">
+                <div class="card-body">
+                    <a class="btn btn-primary-2 rounded-0 py-0" style="float: right;" ng-click="setEnvForEdit(job)"
+                        data-toggle="modal">
+                        <i class="fas fa-edit mr-1"></i> Edit
+                    </a>
+                    <!--<a class="btn btn-sm btn-primary" style="float: right;"  data-ui-sref-active="active" data-target="#jobModal" data-toggle="modal">Edit</a>-->
+                    <h5 class="card-title" style="font-weight: bold;">{{job.Jtitle}}</h5>
+                    <!-- <p class="card-text"><a href="{{job.cname}}"> {{job.cname}}</a></p> -->
+                    <p class="card-text">{{job.cname}}</p>
+                    <p class="card-text">Location: {{job.location}}</p>
+                    <p class="card-text">Salary: ₹ {{job.salary}} per month</p>
+                    <p class="card-text">Experience: {{job.Experience}} yrs</p>
+                    <p class="card-text">Job Type: {{job.type}}</p>
+                    <p class="card-text">Last Date to Apply: {{job.lastdate}}</p>
+                    <p class="card-text"><a href="{{job.externallink}}">{{job.externallink}}</a></p>
+                    <!--<p class="card-text" style="font-weight: italic;">Contact Details</p>
+                <p class="card-text">Contact Person: {{job.cperson}}</p>
+                <p class="card-text">Email: {{job.Email}}</p>
+                <p class="card-text">Phone number: {{job.phonenumber}}</p>
+                <p class="card-img-right">Logo: {{job.logo}}</p>
+                <a href="#" class="card-link">{{job.MoreDetails}}</a>
+                <p> {{job.description | limitTo:numLimit}} </p> -->
+                    <a href="viewjob.html">Read more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="jobModal" class="modal fade" data-keyboard="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" ng-if="dataMode == 'ADD'">Post Job</h6>
+                    <h6 class="modal-title" ng-if="dataMode == 'EDIT'">Edit Job</h6>
+
+                    <button type="button" class="close" data-dismiss="modal"> <span aria-hidden="true">×</span>
+                        <span class="sr-only">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="newJobform">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <div>
+                                            <label class="control-label" for="Jtitle">Job Title</label>
+                                            <input type="text" class="form-control" id="Jtitle" name="Jtitle" ng-model="newJob.Jtitle"
+                                                validation="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <div>
+                                            <label class="control-label" for="cname">Company Name</label>
+                                            <input type="text" class="form-control" id="cname" name="cname" ng-model="newJob.cname"
+                                                validation="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <div>
+                                            <label class="control-label" for="location">Location</label>
+                                            <input type="text" class="form-control" id="location" name="location"
+                                                ng-model="newJob.location" validation="required">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-sm-4 form-group">
+                                    <div>
+                                        <label class="control-label" for="logo">Image</label>
+                                        <div class="input-group mb-3">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="logo" aria-describedby="inputGroupFileAddon01" ng-model="newJob.logo">
+                                                <label class="custom-file-label" for="logo">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <div>
+                                            <label class="control-label" for="salary">Salary Range</label>
+                                            <input type="text" class="form-control" id="salary" name="salary" ng-model="newJob.salary"
+                                                validation="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <div>
+                                            <label class="control-label" for="state">Experience</label>
+                                            <input type="text" class="form-control" id="Experience" name="Experience"
+                                                ng-model="newJob.Experience" validation="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <div>
+                                            <label class="control-label" for="type">Job Type</label>
+
+                                            <select class="form-control" id="type" name="type" ng-model="newJob.type"
+                                                validation="required">
+                                                <option value="Full time">Full Time</option>
+                                                <option value="Intern">Intern</option>
+                                                <option value="part time">Part Time</option>
+                                                <option value="Contract">Contract</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" ng-if="newJob.type=='Intern'">
+                                        <div class="col-sm-12 form-group">
+                                            <div>
+                                                <label class="control-label" for="stipend">Expected Stipend per month</label>
+                                                <input type="text" class="form-control" id="stipend" name="stipend"
+                                                    ng-model="newJob.stipend" validation="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" ng-if="newJob.type=='Intern'">
+                                        <div class="col-sm-12 form-group">
+                                            <label for="date" class="required">Start Date</label>
+                                            <div class="column">
+                                                <input class="form-control form-control-sm" placeholder="DD/MM/YYYY" id="date"
+                                                    ng-flatpickr fp-opts="dateOpts1" ng-model="newJob.date">
+                                                <span class="calender-caret"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-sm-4 form-group">
+                                    <div>
+                                        <label class="control-label" for="description"> Job Description</label>
+                                        <textarea type="text" class="form-control" id="description" name="description"
+                                            ng-model="newJob.description" validation="required">
+                                            </textarea>
+                                    </div>
+                                </div> -->
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label for="description">Description</label>
+                                            <textarea ui-tinymce="tinymceOptions" ng-model="newJob.description" class="form-control"
+                                                validation="required"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label for="date" class="required">Last Date to Apply </label>
+                                        <div class="column">
+                                            <input class="form-control form-control-sm" placeholder="DD/MM/YYYY" id="lastdate"
+                                                ng-flatpickr fp-opts="dateOpts1" ng-model="newJob.lastdate">
+                                            <span class="calender-caret"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <div>
+                                            <!-- <label class="control-label" for="postby">Posted by:</label><br> -->
+                                            <label class="control-label" for="cpname">Contact Person Name</label>
+                                            <input type="text" class="form-control" id="cpname" name="cpname" ng-model="newJob.cperson"
+                                                validation="required">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-sm-4 form-group">
+                                    <div>
+                                        <label class="control-label" for="batch">Batch</label>
+                                        <input type="text" class="form-control" id="batch" name="batch" ng-model="newJob.batch"
+                                            validation="required">
+                                    </div>
+                                </div> -->
+                                    <div class="col-sm-4 form-group">
+                                        <div>
+                                            <label class="control-label" for="Email">Email</label>
+                                            <input type="text" class="form-control" id="Email" name="Email" ng-model="newJob.Email"
+                                                validation="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <div>
+                                            <label class="control-label" for="phonenumber">Phone Number</label>
+                                            <input type="text" class="form-control" id="phonenumber" name="phonenumber"
+                                                ng-model="newJob.phonenumber" validation="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <div>
+                                            <label class="control-label" for="externallink">External Link</label>
+                                            <input type="text" class="form-control" id="externallink" name="externallink"
+                                                ng-model="newJob.externallink" validation="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="saveJob();" ng-if="dataMode == 'ADD'">Save
+                    </button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="updateJob(job);" ng-if="dataMode == 'EDIT'">Update
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,17 @@
+<ol class="breadcrumb border-bottom">
+    <li class="module_name flex-grow-1">LAUDEA: Alumni Engagement Portal</li>
+    <li class="breadcrumb-item"><a data-ui-sref="home">Home</a></li>
+    <li class="breadcrumb-item active" data-ui-sref="bymap">By Map</li>
+</ol>
+<section class="content">
+    <div class="element-wrapper">
+        <h1 class="element-title">By Map</h1>
+    </div>
+</section>
+<div class="card p-3"ng-repeat="location in Locationarr" >
+    <div class="row">
+        <div class="card-body" >             
+            <p class="card-text">l: {{location.nationality}}</p>
+        </div>
+    </div>
+</div>
