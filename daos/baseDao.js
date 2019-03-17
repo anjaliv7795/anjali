@@ -48,14 +48,14 @@ function getAllDistinct(query, callback) {
     });
 }
 
-function getQuerySingleField(query, skipVal, callback) {
+function getQuerySingleField(query,callback) {
     var db = mongodb.getDb();
     var coll = db.collection(this.getCollectionName());
-    var query1 = {"studentEmail" : ''};
+    // var query1 = {"Email" : { $in: query }};
     
-    cursor = coll.find(query, query1).sort({'studentEmail' : 1}).skip(skipVal).limit(200);
-  
-         cursor.toArray(function (err, result) {
+    cursor = coll.find({query},function(err,result){
+    // cursor = coll.find(query, query1);
+        //  cursor.toArray(function (err, result) {
             if (!err) {
                 callback(null, result);
             } else {
@@ -64,6 +64,22 @@ function getQuerySingleField(query, skipVal, callback) {
         });
   
 }
+// function getQuerySingleField(query, skipVal, callback) {
+//     var db = mongodb.getDb();
+//     var coll = db.collection(this.getCollectionName());
+//     var query1 = {"Email" : ''};
+    
+//     cursor = coll.find(query, query1).sort({'Email' : 1}).skip(skipVal).limit(200);
+//     // cursor = coll.find(query, query1);
+//          cursor.toArray(function (err, result) {
+//             if (!err) {
+//                 callback(null, result);
+//             } else {
+//                 callback(err, null);
+//             }
+//         });
+  
+// }
 
 function getByName(query, callback) {
     var db = mongodb.getDb();
